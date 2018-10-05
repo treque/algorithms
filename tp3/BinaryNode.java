@@ -68,12 +68,12 @@ public class BinaryNode<T extends Comparable<? super T> > {
     // de manière que le plus petit item sera le premier inseré
     // O(n)
     public void fillListInOrder(List<BinaryNode<T>> result) {
-    	if (this.left != null) {
-    		result.add(this.left)
-    	}
+    	if (this == null) {
+    		return;
+    	}	
+    	// FIND A FIXXXXXXXXXXXXX
+    	this.left.fillListInOrder(result);
     	result.add(this);
-    	if (this.right != null) {
-    		result.add(this.right);
-    	}
+    	this.right.fillListInOrder(result);
     }
 }

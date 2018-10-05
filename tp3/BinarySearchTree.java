@@ -36,8 +36,11 @@ public class BinarySearchTree<T extends Comparable<? super T> > {
     // O(n)
     public List<BinaryNode<T>> getItemsInOrder() {
     	List<BinaryNode<T>> list = new ArrayList<BinaryNode<T>>();
-    	root.fillListInOrder(list);
-        return list;
+    	if (root != null) {
+    		root.fillListInOrder(list);
+    		return list;
+    	}
+    	return null;
     }
 
     // TODO: retourner la liste d'item en String selon le bon format

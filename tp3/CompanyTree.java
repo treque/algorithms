@@ -32,6 +32,8 @@ public class CompanyTree {
     // de la compagnie mère et de ses enfants
     // O(1)
     public String getTreeInOrder() {
-        return "";
+    	StringBuilder builder = new StringBuilder();
+    	root.fillStringBuilderInOrder(builder, "> ");
+        return builder.toString();
     }
 }

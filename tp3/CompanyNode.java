@@ -37,7 +37,14 @@ public class CompanyNode implements Comparable<CompanyNode> {
     // les enfants sont afficher du plus grand au plus petit (voir TestCompany.testPrint)
     // O(n)
     public void fillStringBuilderInOrder(StringBuilder builder, String prefix) {
+    	builder.append(this.getMoney() + "\n");
     	
+    	List<BinaryNode<CompanyNode>> list = this.childs.getItemsInOrder();
+    	for (int i = list.size(); i > 0 ; i--) {
+    		builder.append(prefix);
+    		list.get(i).getData().fillStringBuilderInOrder(builder, "> ");
+    		builder.append("\n");
+    	}
     }
 
     // TODO: on override le comparateur pour defenir l'ordre

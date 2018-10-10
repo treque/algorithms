@@ -8,19 +8,25 @@ public class CompanyNode implements Comparable<CompanyNode> {
     // TODO: initialisation
     // O(1)
     public CompanyNode(Integer data) {
-
+    	this.money = data;
+    	this.childs = new BinarySearchTree<CompanyNode>(this);
+    	this.worstChild = this;
     }
 
     // TODO: la compagnie courante achete une autre compagnie
     // O(log(n))
     public void buy(CompanyNode item) {
-
+    	this.childs.insert(item);
+    	this.money += item.getMoney();
+    	if (this.worstChild.compareTo(item.worstChild) == 1) {
+    		this.worstChild = item.worstChild;
+    	}
     }
 
     // TODO: on retourne le montant en banque de la compagnie
     // O(1)
     public Integer getMoney() {
-        return Integer.MIN_VALUE;
+    	return this.money;
     }
 
     // TODO: on rempli le builder de la compagnie et de ses enfants avec le format
@@ -31,12 +37,20 @@ public class CompanyNode implements Comparable<CompanyNode> {
     // les enfants sont afficher du plus grand au plus petit (voir TestCompany.testPrint)
     // O(n)
     public void fillStringBuilderInOrder(StringBuilder builder, String prefix) {
-
+    	
     }
 
     // TODO: on override le comparateur pour defenir l'ordre
     @Override
     public int compareTo(CompanyNode item) {
-        return 0;
+        if (this.money < item.getMoney()) {
+        	return -1;
+        }
+        if (this.money > item.getMoney()) {
+        	return 1;
+        }
+        else {
+        	return 0;
+        }
     }
 }

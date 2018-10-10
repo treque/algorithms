@@ -71,7 +71,6 @@ public class BinaryNode<T extends Comparable<? super T> > {
     	if (this == null) {
     		return;
     	}	
-    	// FIND A FIXXXXXXXXXXXXX
     	this.left.fillListInOrder(result);
     	result.add(this);
     	this.right.fillListInOrder(result);

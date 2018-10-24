@@ -110,7 +110,7 @@ public class HashFunctions
            return null;
        }
        int p = 46337;
-        ArrayList<Integer> arrayList = new ArrayList<>)(length);
+        ArrayList<Integer> arrayList = new ArrayList<>(length);
         Random generator = new Random( System.nanoTime() );
         for (Integer item : arrayList){
             Integer randomNumber = generator.nextInt(p);

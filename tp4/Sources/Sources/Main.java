@@ -19,7 +19,7 @@ public class Main
       // en inserant les elements un a un
       for( i = 11, j = 0; j != numItems; i = ( i + 37 ), j++ )
       {
-	  heap.insert( i );
+	  heap.offer( i );
 	  items[ j ] = i;
 
 	  i %=  numItems; 
@@ -32,7 +32,7 @@ public class Main
       heap = new BinaryHeap<Integer>(false);
       // en inserant les elements un a un
       for( Integer item : items)
-	  heap.insert( item );
+	  heap.offer( item );
 
       // en construisant le monceau depuis le depart
       System.out.println("Monceau max contruit element par element:");

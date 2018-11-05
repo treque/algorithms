@@ -95,14 +95,14 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     
     private void buildMinHeap()
     {
-    	for (int i = currentSize; i > 0 ;  i--) {
+    	for (int i = currentSize/2; i > 0 ;  i--) {
     		percolateDownMinHeap(i, currentSize);
     	}
     }
     
     private void buildMaxHeap()
     {
-    	for (int i = currentSize; i > 0 ;  i--) {
+    	for (int i = currentSize/2; i > 0 ;  i--) {
     		percolateDownMaxHeap(i, currentSize);
     	}
     }
@@ -265,7 +265,9 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 				   void heapSort( AnyType[] a )
     {
     	int size = a.length - 1;
-    	for (int i = size ; i > 0 ;  i--) {
+    	
+    	// looking at all the parents
+    	for (int i = size/2 ; i > 0 ;  i--) {
     		percolateDownMaxHeap(a, i, size, true);
     	}
     }
@@ -274,7 +276,8 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 				   void heapSortReverse( AnyType[] a )
     {
     	int size = a.length - 1;
-    	for (int i = size ; i > 0 ;  i--) {
+    	
+    	for (int i = size/2 ; i > 0 ;  i--) {
     		percolateDownMinHeap(a, i, size, true);
     	}
     }
@@ -282,11 +285,19 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     public String nonRecursivePrintFancyTree()
     {
 		String outputString = "";
-		
-		for (i = 1 ; i <= currentSize ; i++) {
-			outputString +=
+		String prefix = "|__";
+		outputString += prefix + array[1];
+
+		for (int i = 2, j = 1 ; i*2 <= this.size() ; i = i *= 2, j++) {
+			outputString += "\n";
+			
+			for ( int k = j ; k > 0; k--) {
+				outputString += "|";
+				outputString += "    ";
+			}
+			outputString += prefix + array[i];
 		}
-	
+		
 		return outputString;
     }
     

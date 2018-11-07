@@ -178,7 +178,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     	for (; hole * 2 <= size ; hole = newHole ) {
     		
 	    	int leftChildIndex = leftChild(hole, heapIndexing);
-	    	int rightChildIndex = leftChild(hole, heapIndexing) + 1;
+	    	int rightChildIndex = leftChildIndex + 1;
 	    	
 	    	// if there is no right child
 	    	if (rightChildIndex > size) {
@@ -264,34 +264,35 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     public static <AnyType extends Comparable<? super AnyType>>
 				   void heapSort( AnyType[] a )
     {
-    	
+    	// https://www.youtube.com/watch?v=2DmK_H7IdTo
     	int size = a.length;
-    	// Rearranging the array
-    	for (int i = size/2 ; i >= 0 ; i--) {
-    		percolateDownMaxHeap(a, i, size, false);
-    	} 
     	
-    	for (int i = size-1 ; i >= 0; i--) {
-        	// Swapping the element at the root to the end;
-    		swapReferences(a, 0, --size);
-    		percolateDownMaxHeap(a, i, size, false);
+    	// Rearranging the array (heapify)
+    	while (size > 0) {
+        	for (int i = size/2 ; i >= 0 ; i--) {
+        		percolateDownMaxHeap(a, i, size-1, false);
+        	} 	
+    		// Root is now the max, move it at the end of the array (sorted)
+    		size--;
+    		swapReferences(a, size, 0);
     	}
-    	
+    
     }
     
     public static <AnyType extends Comparable<? super AnyType>>
 				   void heapSortReverse( AnyType[] a )
     {
+    	// https://www.youtube.com/watch?v=2DmK_H7IdTo
     	int size = a.length;
-    	// Rearranging the array
-    	for (int i = size/2 ; i >= 0 ; i--) {
-    		percolateDownMinHeap(a, i, size, false);
-    	} 
     	
-    	for (int i = size-1 ; i >= 0; i--) {
-        	// Swapping the element at the root to the end;
-    		swapReferences(a, 0, --size);
-    		percolateDownMinHeap(a, i, size, false);
+    	// Rearranging the array (heapify)
+    	while (size > 0) {
+        	for (int i = size/2 ; i >= 0 ; i--) {
+        		percolateDownMinHeap(a, i, size-1, false);
+        	}
+    		// Root is now the max, move it at the end of the array (sorted)
+    		size--;
+    		swapReferences(a, size, 0);
     	}
     }
     

@@ -177,8 +177,8 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     	
     	for (; hole * 2 <= size ; hole = newHole ) {
     		
-	    	int leftChildIndex = leftChild(hole, true);
-	    	int rightChildIndex = leftChild(hole, true) + 1;
+	    	int leftChildIndex = leftChild(hole, heapIndexing);
+	    	int rightChildIndex = leftChild(hole, heapIndexing) + 1;
 	    	
 	    	// if there is no right child
 	    	if (rightChildIndex > size) {
@@ -231,8 +231,8 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     	
     	for (; hole * 2 <= size ; hole = newHole ) {
     		
-	    	int leftChildIndex = leftChild(hole, true);
-	    	int rightChildIndex = leftChild(hole, true) + 1;
+	    	int leftChildIndex = leftChild(hole, heapIndexing);
+	    	int rightChildIndex = leftChild(hole, heapIndexing) + 1;
 	    	
 	    	// if there is no right child
 	    	if (rightChildIndex > size) {

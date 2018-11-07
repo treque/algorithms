@@ -172,40 +172,29 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     private static <AnyType extends Comparable<? super AnyType>>
 				    void percolateDownMinHeap( AnyType[] array, int hole, int size, boolean heapIndexing )
     {
-    	AnyType elementToPlace = array[hole];
-    	int newHole = hole;
     	
-    	for (; hole * 2 <= size ; hole = newHole ) {
+    	AnyType elementToPlace = array[hole];
+    	int minChild;
+    	//https://www.cs.wcupa.edu/rkline/ds/heaps.html
+    	for(; leftChild(hole, heapIndexing) <= size ; hole = minChild) {
+    		int left =  leftChild(hole, heapIndexing);
+	    	int right = left + 1;
+    		minChild = left;
     		
-	    	int leftChildIndex = leftChild(hole, heapIndexing);
-	    	int rightChildIndex = leftChildIndex + 1;
-	    	
-	    	// if there is no right child
-	    	if (rightChildIndex > size) {
-	    		if (array[leftChildIndex].compareTo(elementToPlace) < 0 ) {
-	    			swapReferences(array, hole, leftChildIndex);
-	    		}
-	    		return;
+	    	// if there is a right child, compare the two and pick the minChild
+	    	if (left != size && array[left].compareTo(array[right]) > 0) {
+	    		minChild= right;
+	    	} 	
+	    	// we swap if the parent (hole) is larger than the minChild
+	    	if (array[hole].compareTo(array[minChild]) > 0) {
+	    		array[hole] = array[minChild];
 	    	}
-	    
-	    	// if the left child is smaller than the right child and smaller than the element to place
-	    	if (array[leftChildIndex].compareTo(array[rightChildIndex]) < 0 && array[leftChildIndex].compareTo(elementToPlace) < 0 ) {
-	    		swapReferences(array, hole, leftChildIndex);
-	    		newHole = leftChildIndex;
+	    	// if it's at its right position
+	    	else {
+	    		break;
 	    	}
-	    	// if the right child is smaller than the left child and smaller than the element to place
-	    	else if (array[rightChildIndex].compareTo(array[leftChildIndex]) < 0 && array[rightChildIndex].compareTo(elementToPlace) < 0 ) {
-	    		swapReferences(array, hole, rightChildIndex);
-	    		newHole = rightChildIndex;
-	    	}
-	    	
-	    	// if the element to place is at its right place
-	    	else if (elementToPlace.compareTo(array[leftChildIndex]) < 0 && elementToPlace.compareTo(array[rightChildIndex]) < 0) {
-	    		return;
-	    	}
-	    	
     	}
-
+    	array[hole] = elementToPlace;
     }
     
     /**
@@ -227,38 +216,27 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 				    void percolateDownMaxHeap( AnyType[] array, int hole, int size, boolean heapIndexing )
     {
     	AnyType elementToPlace = array[hole];
-    	int newHole = hole;
-    	
-    	for (; hole * 2 <= size ; hole = newHole ) {
+    	int maxChild;
+    	//https://www.cs.wcupa.edu/rkline/ds/heaps.html
+    	for(; leftChild(hole, heapIndexing) <= size ; hole = maxChild) {
+    		int left =  leftChild(hole, heapIndexing);
+	    	int right = left + 1;
+    		maxChild = left;
     		
-	    	int leftChildIndex = leftChild(hole, heapIndexing);
-	    	int rightChildIndex = leftChild(hole, heapIndexing) + 1;
-	    	
-	    	// if there is no right child
-	    	if (rightChildIndex > size) {
-	    		if (array[leftChildIndex].compareTo(elementToPlace) > 0 ) {
-	    			swapReferences(array, hole, leftChildIndex);
-	    		}
-	    		return;
+	    	// if there is a right child, compare the two and pick the maxChild
+	    	if (left != size && array[left].compareTo(array[right]) < 0) {
+	    		maxChild= right;
+	    	} 	
+	    	// we swap if the parent (hole) is smaller than the maxChild
+	    	if (array[hole].compareTo(array[maxChild]) < 0) {
+	    		array[hole] = array[maxChild];
 	    	}
-	    	
-	    	// if the left child is larger than the right child and larger than the element to place
-	    	if (array[leftChildIndex].compareTo(array[rightChildIndex]) > 0 && array[leftChildIndex].compareTo(elementToPlace) > 0 ) {
-	    		swapReferences(array, hole, leftChildIndex);
-	    		newHole = leftChildIndex;
+	    	// if it's at its right position
+	    	else {
+	    		break;
 	    	}
-	    	// if the right child is larger than the left child and larger than the element to place
-	    	else if (array[rightChildIndex].compareTo(array[leftChildIndex]) > 0 && array[rightChildIndex].compareTo(elementToPlace) > 0 ) {
-	    		swapReferences(array, hole, rightChildIndex);
-	    		newHole = rightChildIndex;
-	    	}
-	    	
-	    	// if the element to place is at its right place
-	    	else if (elementToPlace.compareTo(array[leftChildIndex]) > 0 && elementToPlace.compareTo(array[rightChildIndex]) > 0) {
-	    		return;
-	    	}
-	    	
     	}
+    	array[hole] = elementToPlace;
     }
     
     public static <AnyType extends Comparable<? super AnyType>>

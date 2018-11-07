@@ -264,21 +264,26 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     public static <AnyType extends Comparable<? super AnyType>>
 				   void heapSort( AnyType[] a )
     {
-    	int size = a.length - 1;
-    	
-    	// looking at all the parents
-    	for (int i = size/2 ; i > 0 ;  i--) {
-    		percolateDownMaxHeap(a, i, size, true);
+    	int size = a.length;
+    	while (size > 0) {
+    		for (int i = size/2 ; i >= 0 ; i--) {
+    			percolateDownMaxHeap(a, i, size-1, false);
+    		} 
+    		// Swapping the element at the root to the end;
+    		swapReferences(a, 0, --size);
     	}
     }
     
     public static <AnyType extends Comparable<? super AnyType>>
 				   void heapSortReverse( AnyType[] a )
     {
-    	int size = a.length - 1;
-    	
-    	for (int i = size/2 ; i > 0 ;  i--) {
-    		percolateDownMinHeap(a, i, size, true);
+    	int size = a.length;
+    	while (size > 0) {
+    		for (int i = size/2 ; i >= 0 ; i--) {
+    			percolateDownMinHeap(a, i, size-1, false);
+    		} 
+    		// Swapping the element at the root to the end;
+    		swapReferences(a, 0, --size);
     	}
     }
     
